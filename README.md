@@ -14,7 +14,7 @@ app inventor blocks (Tradition Chindese)
 1. insert 新增
 2. selece 搜尋
 3. delete 刪除
-4. dpdate 修改
+4. update 修改
 
 附上 APP Inventor 2 的截圖(介面為繁體中文)
 每一項功能的註解，會陸續更新！
