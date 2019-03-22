@@ -4,32 +4,38 @@ include_once('include/connect_db.php');
 $username=$_GET['username'];
 $password=$_GET['password'];
 $remark=$_GET['remark'];
+
+/* 無檢查是否重複，直接insert
 $query="INSERT INTO `account`(`id`,`username`,`password`,`remark`) VALUE ('','{$username}','{$password}','{$remark}')";
 $result=mysql_query($query);
 if($result)
 {
-	echo true;
+	echo 'true';
 }
 else
 {
-	echo false;
+	echo 'false';
 }
 
-//echo "NAME:".$username."</br>"."PW:".$password;
+*/ 
+// 有檢查是否重複，不重複才insert，重複時回傳repeat
+$sql="SELECT * FROM `account` WHERE `username`='$username'";
+$result=mysql_query($sql);
+$nums=mysql_num_rows($result);
+if($nums > 0){
+	while($row=mysql_fetch_array($result)){
+		$db_name=$row['username'];
+	}
+	if($username==$db_name){
+		echo "repeat";
+	}
+}
+else{
+	echo "ok";
+	$query="INSERT INTO `account`(`id`,`username`,`password`,`remark`) VALUE ('','{$username}','{$password}','{$remark}')";
+	$result=mysql_query($query);
+	
+}
+
+
 ?>
-
-<!DOCTYPE html>
-<html>
-<body>
-<!---
-<form action='' method="get">
-username:<input type='text' name="username" /></br>
-password:<input type='text' name="password" /></br>
-remark:<input type='text' name="remark"></br>
-<input type="submit" value="SEND" />
-</form>
----!>
-
-</body>
-
-</html>
